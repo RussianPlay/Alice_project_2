@@ -8,12 +8,12 @@ app = Flask(__name__)
 logging.basicConfig(level=logging.INFO)
 
 cities = {
-    'москва': ['cities/moskva_1.jpg',
-               'cities/moskva_2.jpg'],
-    'нью-йорк': ['cities/new_york_1.jpg',
-                 'cities/new_york_2.jpg'],
-    'париж': ["cities/paris_1.jpg",
-              'cities/paris_2.jpg']
+    'москва': ['937455/0d92a3a245fdcc16c646',
+               '1652229/0fe8c15ac45a09a47aef'],
+    'нью-йорк': ['1521359/fd431a1f89556c431caa',
+                 '1652229/4d443f83ff9edef075b6'],
+    'париж': ["937455/29f2b5e040304267157c",
+              '937455/1f6341b8073e13a01258']
 }
 sessionStorage = {}
 
