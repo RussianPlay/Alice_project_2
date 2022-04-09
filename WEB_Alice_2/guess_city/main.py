@@ -51,10 +51,6 @@ def handle_dialog(res, req):
             sessionStorage[user_id]["first_name"] = first_name
             res["response"]["text"] = \
                 "Приятно познакомиться, " + first_name.title() + "Алиса. Какой город хочешь увидеть?"
-            res["response"]["buttons"] = [{
-                "title": city.title(),
-                "hide": True
-            } for city in cities]
     else:
         city = get_city(req)
         if city in cities:
@@ -65,6 +61,10 @@ def handle_dialog(res, req):
             res["response"]["text"] = "Я угадал"
         else:
             res["response"]["text"] = "Первый раз слышу об этом городе. Попробуй еще разок!"
+    res["response"]["buttons"] = [{
+        "title": city.title(),
+        "hide": True
+    } for city in cities]
 
 
 def get_city(req):
