@@ -52,7 +52,7 @@ def handle_dialog(res, req):
             res["response"]["text"] = \
                 "Приятно познакомиться, " + first_name.title() + "Алиса. Какой город хочешь увидеть?"
     else:
-        if req["request"]["nlu"]["entities"]["value"].lower() == "помощь":
+        if req["request"]["command"].lower() == "помощь":
             res["response"]["text"] = "Ты просто должен написать название города и я ее угадаю"
         else:
             city = get_city(req)
