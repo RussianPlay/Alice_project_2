@@ -160,7 +160,7 @@ def play_game(res, req):
                 }]
         elif get_country(req) is Exception:
             # если нет
-            if attempt == 3:
+            if attempt == 6:
                 # если попытка третья, то значит, что все картинки мы показали.
                 # В этом случае говорим ответ пользователю,
                 # добавляем город к sessionStorage[user_id]['guessed_cities'] и отправляем его на второй круг.
@@ -176,10 +176,8 @@ def play_game(res, req):
                 res['response']['card']['title'] = 'Неправильно. Вот тебе дополнительное фото'
                 res['response']['card']['image_id'] = cities[city][attempt - 1]
                 res['response']['text'] = 'А вот и не угадал!'
-
-    if get_country(req) is Exception:
-        # увеличиваем номер попытки доля следующего шага
-        sessionStorage[user_id]['attempt'] += 1
+    # увеличиваем номер попытки доля следующего шага
+    sessionStorage[user_id]['attempt'] += 1
 
 
 def get_city(req):
