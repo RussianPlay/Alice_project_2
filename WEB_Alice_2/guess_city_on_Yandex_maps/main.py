@@ -89,9 +89,7 @@ def handle_dialog(res, req):
             elif "покажи город на карте" == req["request"]["command"].lower():
                 coords = get_coordinates(sessionStorage[user_id]["guessed_cities"][-1])
                 if coords is not Exception:
-                    res["response"]["card"] = {}
-                    res["response"]["card"]["type"] = "BigImage"
-                    res["response"]["card"]["image_id"] = create_map(",".join(map(str, coords)))
+                    res["response"]["text"] = create_map(",".join(map(str, coords)))
             else:
                 res['response']['text'] = 'Не поняла ответа! Так да или нет?'
                 res['response']['buttons'] = [
