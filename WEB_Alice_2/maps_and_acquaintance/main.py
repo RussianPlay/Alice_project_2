@@ -85,8 +85,6 @@ def handle_dialog(res, req):
                     # функция, которая выбирает город для игры и показывает фото
                     sessionStorage[user_id]['complete_guess_part'] = False
                     play_game(res, req)
-            elif not sessionStorage[user_id]['complete_guess_part']:
-                play_game(res, req)
             elif 'нет' in req['request']['nlu']['tokens']:
                 res['response']['text'] = 'Ну и ладно!'
                 res['end_session'] = True
@@ -94,6 +92,8 @@ def handle_dialog(res, req):
                 coords = get_coordinates(sessionStorage[user_id]["guessed_cities"][-1])
                 if coords is not Exception:
                     res["response"]["text"] = create_map(",".join(map(str, coords)))
+            elif not sessionStorage[user_id]['complete_guess_part']:
+                play_game(res, req)
             else:
                 res['response']['text'] = f'{sessionStorage[user_id]["first_name"]}, Не поняла ответа! Так да или нет?'
                 res['response']['buttons'] = [
