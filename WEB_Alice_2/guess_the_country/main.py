@@ -149,9 +149,9 @@ def play_game(res, req):
                 }]
             sessionStorage[user_id]['guessed_cities'].append(city)
             sessionStorage[user_id]['game_started'] = False
-        elif get_country(req) is not Exception:
+        elif get_country(req) is not Exception and get_country(req) is not "Country":
             sessionStorage[user_id]['complete_guess_part'] = True
-            res['response']['text'] = f'Правильно! Сыграем ещё? {get_country(req)}'
+            res['response']['text'] = f'Правильно! Сыграем ещё?'
             res["response"]["buttons"] = [
                 {
                     'title': 'Да',
@@ -162,7 +162,7 @@ def play_game(res, req):
                     'hide': True
                 }]
             return
-        elif get_country(req) is Exception:
+        elif get_country(req) is Exception or get_country(req) is "Country":
             # если нет
             if attempt == 3:
                 # если попытка третья, то значит, что все картинки мы показали.
