@@ -86,7 +86,7 @@ def handle_dialog(res, req):
             elif 'нет' in req['request']['nlu']['tokens']:
                 res['response']['text'] = 'Ну и ладно!'
                 res['end_session'] = True
-            elif "покажи город на карте" in req["request"]["command"]:
+            elif "покажи город на карте" == req["request"]["command"].lower():
                 coords = get_coordinates(sessionStorage[user_id]["guessed_cities"][-1])
                 if coords is not Exception:
                     res["response"]["card"] = {}
