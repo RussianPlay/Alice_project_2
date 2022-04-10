@@ -81,8 +81,11 @@ def handle_dialog(res, req):
                     sessionStorage[user_id]['game_started'] = True
                     # номер попытки, чтобы показывать фото по порядку
                     sessionStorage[user_id]['attempt'] = 1
+                    sessionStorage[user_id]['complete_guess_part'] = False
                     # функция, которая выбирает город для игры и показывает фото
                     play_game(res, req)
+            elif not sessionStorage[user_id]['complete_guess_part']:
+                play_game(res. req)
             elif 'нет' in req['request']['nlu']['tokens']:
                 res['response']['text'] = 'Ну и ладно!'
                 res['end_session'] = True
@@ -146,8 +149,8 @@ def play_game(res, req):
                 }]
             sessionStorage[user_id]['guessed_cities'].append(city)
             sessionStorage[user_id]['game_started'] = False
-            return play_game(res, req)
         elif get_country(req) is not Exception:
+            sessionStorage[user_id]['complete_guess_part'] = True
             res['response']['text'] = 'Правильно! Сыграем ещё?'
             res["response"]["buttons"] = [
                 {
@@ -161,7 +164,7 @@ def play_game(res, req):
             return
         elif get_country(req) is Exception:
             # если нет
-            if attempt == 6:
+            if attempt == 3:
                 # если попытка третья, то значит, что все картинки мы показали.
                 # В этом случае говорим ответ пользователю,
                 # добавляем город к sessionStorage[user_id]['guessed_cities'] и отправляем его на второй круг.
