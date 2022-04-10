@@ -149,7 +149,7 @@ def play_game(res, req):
                 }]
             sessionStorage[user_id]['guessed_cities'].append(city)
             sessionStorage[user_id]['game_started'] = False
-        elif sessionStorage[user_id]["guessed_cities"] and get_country(sessionStorage[user_id]["guessed_cities"][-1]).lower() == res["response"]["command"]:
+        elif sessionStorage[user_id]["guessed_cities"] and get_country(sessionStorage[user_id]["guessed_cities"][-1]).lower() == req["request"]["command"]:
             sessionStorage[user_id]['complete_guess_part'] = True
             res['response']['text'] = f'Правильно! Сыграем ещё? {get_country(req)}'
             res["response"]["buttons"] = [
@@ -162,7 +162,7 @@ def play_game(res, req):
                     'hide': True
                 }]
             return
-        elif sessionStorage[user_id]["guessed_cities"] and get_country(sessionStorage[user_id]["guessed_cities"][-1]).lower() != res["response"]["command"]:
+        elif sessionStorage[user_id]["guessed_cities"] and get_country(sessionStorage[user_id]["guessed_cities"][-1]).lower() != req["request"]["command"]:
             # если нет
             if attempt == 3:
                 # если попытка третья, то значит, что все картинки мы показали.
