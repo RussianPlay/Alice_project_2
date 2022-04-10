@@ -149,7 +149,7 @@ def play_game(res, req):
                 }]
             sessionStorage[user_id]['guessed_cities'].append(city)
             sessionStorage[user_id]['game_started'] = False
-        elif get_country(req) is not Exception and get_country(req) is not "Country":
+        elif get_country(sessionStorage[user_id]["guessed_cities"][-1]).lower() == res["response"]["command"]:
             sessionStorage[user_id]['complete_guess_part'] = True
             res['response']['text'] = f'Правильно! Сыграем ещё? {get_country(req)}'
             res["response"]["buttons"] = [
@@ -162,7 +162,7 @@ def play_game(res, req):
                     'hide': True
                 }]
             return
-        elif get_country(req) is Exception or get_country(req) is "Country":
+        elif get_country(sessionStorage[user_id]["guessed_cities"][-1]).lower() != res["response"]["command"]:
             # если нет
             if attempt == 3:
                 # если попытка третья, то значит, что все картинки мы показали.
@@ -203,12 +203,12 @@ def get_first_name(req):
             return entity['value'].get('first_name', None)
 
 
-def get_country(req):
+def get_country(city_name):
     try:
         url = "https://geocode-maps.yandex.ru/1.x/"
         params = {
             "apikey": "40d1649f-0493-4b70-98ba-98533de7710b",
-            "geocode": req["request"]["original_utterance"],
+            "geocode": city_name,
             "format": "json"
         }
 
