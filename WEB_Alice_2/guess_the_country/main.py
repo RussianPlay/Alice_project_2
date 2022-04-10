@@ -217,7 +217,7 @@ def get_country(req):
         return json["response"]["GeoObjectCollection"]["featureMember"][0]["GeoObject"][
             "metaDataProperty"]["GeocoderMetaData"]["AddressDetails"]["Country"]["CountryName"]
     except Exception as e:
-        return e
+        return Exception
 
 
 def get_coordinates(city_name):
@@ -234,7 +234,7 @@ def get_coordinates(city_name):
         long, lat = map(float, coordinates_str.split())
         return long, lat
     except Exception as e:
-        return e
+        return Exception
 
 
 def create_map(coords):
