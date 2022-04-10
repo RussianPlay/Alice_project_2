@@ -151,7 +151,7 @@ def play_game(res, req):
             sessionStorage[user_id]['game_started'] = False
         elif get_country(req) is not Exception and get_country(req) is not "Country":
             sessionStorage[user_id]['complete_guess_part'] = True
-            res['response']['text'] = f'Правильно! Сыграем ещё?'
+            res['response']['text'] = f'Правильно! Сыграем ещё? {get_country(req)}'
             res["response"]["buttons"] = [
                 {
                     'title': 'Да',
