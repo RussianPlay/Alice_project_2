@@ -146,7 +146,7 @@ def play_game(res, req):
                 }]
             sessionStorage[user_id]['guessed_cities'].append(city)
             sessionStorage[user_id]['game_started'] = False
-            play_game(res, req)
+            return play_game(res, req)
         elif get_country(req) is not Exception:
             res['response']['text'] = 'Правильно! Сыграем ещё?'
             res["response"]["buttons"] = [
