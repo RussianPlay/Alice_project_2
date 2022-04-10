@@ -41,6 +41,8 @@ def handle_dialog(res, req):
                        "format": "json"}
         response = requests.request("GET", translator_url, headers=headers, params=querystring)
         res["response"]["text"] = response.json()["responseData"]["translatedText"]
+    else:
+        res["response"]["text"] = "| Welcome to translator! |"
 
 
 if __name__ == '__main__':
