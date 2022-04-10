@@ -31,15 +31,16 @@ def main():
 
 
 def handle_dialog(res, req):
-    text = req["request"]["command"].split(" слово ")[-1]
-    querystring = {"langpair": "ru|en",
-                   "q": text,
-                   "mt": "1",
-                   "onlyprivate": "0",
-                   "de": "ahmadullinta@mail.ru",
-                   "format": "json"}
-    response = requests.request("GET", translator_url, headers=headers, params=querystring)
-    res["response"]["text"] = response.json()["responseData"]["translatedText"]
+    if not req["session"]["new"]:
+        text = req["request"]["command"].split("слово")[-1].strip()
+        querystring = {"langpair": "ru|en",
+                       "q": text,
+                       "mt": "1",
+                       "onlyprivate": "0",
+                       "de": "ahmadullinta@mail.ru",
+                       "format": "json"}
+        response = requests.request("GET", translator_url, headers=headers, params=querystring)
+        res["response"]["text"] = response.json()["responseData"]["translatedText"]
 
 
 if __name__ == '__main__':
