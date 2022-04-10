@@ -38,7 +38,8 @@ def handle_dialog(res, req):
         res['response']['text'] = 'Привет! Назови своё имя!'
         sessionStorage[user_id] = {
             'first_name': None,  # здесь будет храниться имя
-            'game_started': False  # здесь информация о том, что пользователь начал игру. По умолчанию False
+            'game_started': False,  # здесь информация о том, что пользователь начал игру. По умолчанию False
+            'complete_guess_part': False
         }
         return
 
@@ -81,8 +82,8 @@ def handle_dialog(res, req):
                     sessionStorage[user_id]['game_started'] = True
                     # номер попытки, чтобы показывать фото по порядку
                     sessionStorage[user_id]['attempt'] = 1
-                    sessionStorage[user_id]['complete_guess_part'] = False
                     # функция, которая выбирает город для игры и показывает фото
+                    sessionStorage[user_id]['complete_guess_part'] = False
                     play_game(res, req)
             elif not sessionStorage[user_id]['complete_guess_part']:
                 play_game(res, req)
